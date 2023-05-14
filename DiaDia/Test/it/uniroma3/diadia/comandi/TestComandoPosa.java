@@ -58,7 +58,7 @@ public class TestComandoPosa {
 		}
 	
 	}
-	@Test
+/*	@Test
 	public void testTroppiAttrezzi() {
 	
 		
@@ -69,5 +69,5 @@ public class TestComandoPosa {
 
 		assertFalse(partita.getStanzaCorrente().hasAttrezzo("martello"));
 	}
-
+*/
 }

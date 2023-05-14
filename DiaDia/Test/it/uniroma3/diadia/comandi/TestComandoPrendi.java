@@ -3,6 +3,10 @@ package it.uniroma3.diadia.comandi;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +32,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 	@Before
 	public void setUp() {
 		this.partita = new Partita();
-		this.attrezzo = new Attrezzo("martello", 2);
 		this.attrezzoPesante = new Attrezzo("incudine", 11);
 		this.attrezzoNull = null;
 		this.comando = new ComandoPrendi();
@@ -37,13 +40,17 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 		this.borsa=new Borsa();
 		this.giocatore.setBorsa(borsa);
 		this.partita.setGiocatore(giocatore);
+		this.partita.setStanzaCorrente(stanza);
 		
 	}
 	
 	public boolean attrezzoPresente(Attrezzo a ) {
-		Attrezzo[] array = partita.getStanzaCorrente().getAttrezzi();
-		for(Attrezzo b : array) {
-			if(b != null && a.getNome().equals(b.getNome()))
+		Set<Attrezzo> attrezzi = (Set<Attrezzo>) this.partita.getStanzaCorrente().getAttrezzi();
+		Iterator<Attrezzo> it = attrezzi.iterator();
+		while(it.hasNext()) {
+			Attrezzo b=it.next();
+			System.out.println(b);
+			if(a != null && b.getNome().equals(a.getNome()))
 					return true;
 		}
 		return false;
@@ -51,9 +58,9 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 	
 	@Test
 	  public void testAttrezzoPreso() {
-	    partita.setStanzaCorrente(stanza);
-		partita.getStanzaCorrente().addAttrezzo(attrezzo);
-		this.comando.setParametro("martello");
+		Attrezzo attrezzo=new Attrezzo("palo",2);
+		this.partita.getStanzaCorrente().addAttrezzo(attrezzo);
+		this.comando.setParametro("palo");
 		this.comando.esegui(partita);
 		assertTrue(attrezzoPresente(attrezzo));
 	}

@@ -1,6 +1,6 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.ambienti.labirinto;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
@@ -15,14 +15,22 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	private labirinto labirinto;
+	private Labirinto labirinto;
 	private Giocatore giocatore;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	
 	public Partita(){
-		this.labirinto = new labirinto();
+		this.labirinto = new Labirinto();
+		this.labirinto.creaStanze();
 		this.giocatore= new Giocatore();
+		this.stanzaCorrente=labirinto.getStanzaIniziale();
+		this.stanzaVincente=labirinto.getStanzaVincente();
+	}
+	public Partita(Labirinto labirinto) {
+		this.labirinto=labirinto;
+		this.labirinto.newBuilder();
+		this.giocatore=new Giocatore();
 		this.stanzaCorrente=labirinto.getStanzaIniziale();
 		this.stanzaVincente=labirinto.getStanzaVincente();
 	}
@@ -57,6 +65,12 @@ public class Partita {
 
 	public void setGiocatore(Giocatore giocatore) {
 		this.giocatore = giocatore;
+	}
+	public Labirinto getLabirinto() {
+		return labirinto;
+	}
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
 	}	
 	
 	

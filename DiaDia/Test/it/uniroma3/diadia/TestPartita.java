@@ -35,7 +35,7 @@ public class TestPartita {
 	@Test
 	final void testGetStanzaVincente() {
 		this.partita.getStanzaVincente();
-		assertEquals(this.stanzaVincente.getNome(),this.partita.getStanzaVincente().getNome());
+		assertEquals(this.stanzaVincente,this.partita.getStanzaVincente());
 	}
 	
 	
